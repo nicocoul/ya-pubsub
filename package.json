@@ -1,6 +1,6 @@
 {
-  "name": "yap-pubsub",
-  "version": "0.2.1",
+  "name": "ya-pubsub",
+  "version": "0.2.4",
   "description": "",
   "main": "index.js",
   "author": "Nicolas Coulon <coulon_nicolas@hotmail.com> (https://github.com/nicocoul)",
@@ -32,7 +32,7 @@
     "render-readme": "node cli/render-readme.js"
   },
   "dependencies": {
-    "ya-common": "^0.1.1"
+    "ya-common": "^0.1.2"
   },
   "devDependencies": {
     "eslint": "^8.3.0",
@@ -44,6 +44,6 @@
     "jest-cli": "^27.3.1",
     "jest-junit": "^12.2.0",
     "mustache": "^4.2.0",
-    "ws": "^8.2.3"
+    "ws": "^8.3.0"
   }
 }
