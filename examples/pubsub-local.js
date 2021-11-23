@@ -1,4 +1,4 @@
-const { pubsub } = require('../index.js')
+const pubsub = require('../index.js')
 
 const broker = pubsub.broker()
 
@@ -15,3 +15,10 @@ broker.subscribe('some-topic', (message) => {
 setTimeout(() => {
   broker.publish('some-topic', { hello: 'world2' })
 }, 50)
+
+/* output:
+received from first subscriber hello
+received from second subscriber hello
+received from first subscriber { hello: 'world2' }
+received from second subscriber { hello: 'world2' }
+*/

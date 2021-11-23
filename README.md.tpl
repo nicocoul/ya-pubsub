@@ -1,4 +1,6 @@
-Yaps-node is a [topic-based](http://en.wikipedia.org/wiki/Publish–subscribe_pattern#Message_filtering) [publish/subscribe](http://en.wikipedia.org/wiki/Publish/subscribe) library for Node js.
+Ya PubSub is a [topic-based](http://en.wikipedia.org/wiki/Publish–subscribe_pattern#Message_filtering) [publish/subscribe](http://en.wikipedia.org/wiki/Publish/subscribe) library for Node js.
+
+Works well with [ya-rfc](https://www.npmjs.com/package/ya-rfc).
 
 ### Key Features
 * asynchronous
