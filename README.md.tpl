@@ -8,18 +8,19 @@ Works well with [ya-rfc](https://www.npmjs.com/package/ya-rfc).
 * designed for micro-services
 
 
-### Examples
-Publishing and subscribing locally (same process)
-```javascript
-{{{examples.pubSubLocal}}}
-```
-Publishing and subscribing over tcp
+### Basic Example
+
+PubSub over tcp:
 ```javascript
 {{{examples.pubSubTcp}}}
 ```
-Publishing and subscribing over web sockets
+PubSub over websockets
 ```javascript
 {{{examples.pubSubWs}}}
+```
+PubSub locally (same process)
+```javascript
+{{{examples.pubSubLocal}}}
 ```
 
 ### Topic Filtering
