@@ -1,13 +1,13 @@
 const net = require('net')
-const { pubsub, plugins } = require('../index.js')
+const ya = require('../index.js')
 
-const broker = pubsub.broker()
-broker.plug(plugins.broker.net(net.Server().listen(8000)))
+const broker = ya.broker()
+broker.plug(ya.plugins.net(net.Server().listen(8000)))
 
 broker.publish('some-topic', 'hello')
 
-const client1 = pubsub.client.net({ host: 'localhost', port: 8000 })
-const client2 = pubsub.client.net({ host: 'localhost', port: 8000 })
+const client1 = ya.client.net({ host: 'localhost', port: 8000 })
+const client2 = ya.client.net({ host: 'localhost', port: 8000 })
 
 client1.publish('some-topic', { hello: 'world1' })
 
@@ -18,3 +18,9 @@ client2.subscribe('some-topic', (message) => {
 setTimeout(() => {
   client1.publish('some-topic', { hello: 'world2' })
 }, 50)
+
+/* output:
+hello
+{ hello: 'world1' }
+{ hello: 'world2' }
+*/

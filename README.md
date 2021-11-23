@@ -9,7 +9,7 @@ Yaps-node is a [topic-based](http://en.wikipedia.org/wiki/Publish–subscribe_pa
 ### Examples
 Publishing and subscribing locally (same process)
 ```javascript
-const { pubsub } = require('../index.js')
+const pubsub = require('../index.js')
 
 const broker = pubsub.broker()
 
@@ -27,19 +27,26 @@ setTimeout(() => {
   broker.publish('some-topic', { hello: 'world2' })
 }, 50)
 
+/* output:
+received from first subscriber hello
+received from second subscriber hello
+received from first subscriber { hello: 'world2' }
+received from second subscriber { hello: 'world2' }
+*/
+
 ```
 Publishing and subscribing over tcp
 ```javascript
 const net = require('net')
-const { pubsub, plugins } = require('../index.js')
+const ya = require('../index.js')
 
-const broker = pubsub.broker()
-broker.plug(plugins.broker.net(net.Server().listen(8000)))
+const broker = ya.broker()
+broker.plug(ya.plugins.net(net.Server().listen(8000)))
 
 broker.publish('some-topic', 'hello')
 
-const client1 = pubsub.client.net({ host: 'localhost', port: 8000 })
-const client2 = pubsub.client.net({ host: 'localhost', port: 8000 })
+const client1 = ya.client.net({ host: 'localhost', port: 8000 })
+const client2 = ya.client.net({ host: 'localhost', port: 8000 })
 
 client1.publish('some-topic', { hello: 'world1' })
 
@@ -51,18 +58,24 @@ setTimeout(() => {
   client1.publish('some-topic', { hello: 'world2' })
 }, 50)
 
+/* output:
+hello
+{ hello: 'world1' }
+{ hello: 'world2' }
+*/
+
 ```
 Publishing and subscribing over web sockets
 ```javascript
 const { WebSocketServer } = require('ws')
-const { pubsub, plugins } = require('../index.js')
+const ya = require('../index.js')
 
-const broker = pubsub.broker()
-broker.plug(plugins.broker.ws(new WebSocketServer({ port: 8001 })))
+const broker = ya.broker()
+broker.plug(ya.plugins.ws(new WebSocketServer({ port: 8001 })))
 broker.publish('some-topic', 'hello')
 
-const client1 = pubsub.client.ws({ host: 'localhost', port: 8001 })
-const client2 = pubsub.client.ws({ host: 'localhost', port: 8001 })
+const client1 = ya.client.ws({ host: 'localhost', port: 8001 })
+const client2 = ya.client.ws({ host: 'localhost', port: 8001 })
 
 client2.publish('some-topic', { hello: 'world1' })
 
@@ -73,6 +86,12 @@ client2.subscribe('some-topic', (message) => {
 setTimeout(() => {
   client1.publish('some-topic', { hello: 'world2' })
 }, 50)
+
+/* output:
+hello
+{ hello: 'world1' }
+{ hello: 'world2' }
+*/
 
 ```
 
