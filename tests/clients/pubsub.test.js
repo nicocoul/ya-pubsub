@@ -136,13 +136,13 @@ describe('Pubsub client', () => {
     const received1 = []
 
     pubsubClient.subscribe('topic1', (m) => { received1.push(m) })
-    channel.remote.writable.write({ t: 'topic1', o: 0, m: 0 })
+    channel.remote.writable.write({ t: 'topic1', o: 0, m: 'x' })
     await pause(50)
-    pubsubClient.unsubscribe('topic1')
+    //pubsubClient.unsubscribe('topic1')
     channel.remote.writable.write({ c: COMMANDS.PUBLISH, t: 'topic1', o: 1, m: 1 })
     channel.remote.writable.write({ c: COMMANDS.PUBLISH, t: 'topic1', o: 2, m: 2 })
 
-    await pause(10)
+    await pause(50)
     pubsubClient.destroy()
 
     expect(received1).toStrictEqual([0])
