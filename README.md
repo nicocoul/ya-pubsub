@@ -8,36 +8,9 @@ Works well with [ya-rfc](https://www.npmjs.com/package/ya-rfc).
 * designed for micro-services
 
 
-### Examples
-Publishing and subscribing locally (same process)
-```javascript
-const pubsub = require('../index.js')
+### Basic Example
 
-const broker = pubsub.broker()
-
-broker.publish('some-topic', 'hello')
-
-broker.subscribe('some-topic', (message) => {
-  console.log('received from first subscriber', message)
-})
-
-broker.subscribe('some-topic', (message) => {
-  console.log('received from second subscriber', message)
-})
-
-setTimeout(() => {
-  broker.publish('some-topic', { hello: 'world2' })
-}, 50)
-
-/* output:
-received from first subscriber hello
-received from second subscriber hello
-received from first subscriber { hello: 'world2' }
-received from second subscriber { hello: 'world2' }
-*/
-
-```
-Publishing and subscribing over tcp
+PubSub over tcp:
 ```javascript
 const net = require('net')
 const ya = require('../index.js')
@@ -45,29 +18,24 @@ const ya = require('../index.js')
 const broker = ya.broker()
 broker.plug(ya.plugins.net(net.Server().listen(8000)))
 
-broker.publish('some-topic', 'hello')
-
 const client1 = ya.client.net({ host: 'localhost', port: 8000 })
-const client2 = ya.client.net({ host: 'localhost', port: 8000 })
 
 client1.publish('some-topic', { hello: 'world1' })
 
+const client2 = ya.client.net({ host: 'localhost', port: 8000 })
 client2.subscribe('some-topic', (message) => {
   console.log(message)
 })
 
-setTimeout(() => {
-  client1.publish('some-topic', { hello: 'world2' })
-}, 50)
+client1.publish('some-topic', { hello: 'world2' })
 
 /* output:
-hello
 { hello: 'world1' }
 { hello: 'world2' }
 */
 
 ```
-Publishing and subscribing over web sockets
+PubSub over websockets
 ```javascript
 const { WebSocketServer } = require('ws')
 const ya = require('../index.js')
@@ -93,6 +61,34 @@ setTimeout(() => {
 hello
 { hello: 'world1' }
 { hello: 'world2' }
+*/
+
+```
+PubSub locally (same process)
+```javascript
+const pubsub = require('../index.js')
+
+const broker = pubsub.broker()
+
+broker.publish('some-topic', 'hello')
+
+broker.subscribe('some-topic', (message) => {
+  console.log('received from first subscriber', message)
+})
+
+broker.subscribe('some-topic', (message) => {
+  console.log('received from second subscriber', message)
+})
+
+setTimeout(() => {
+  broker.publish('some-topic', { hello: 'world2' })
+}, 50)
+
+/* output:
+received from first subscriber hello
+received from second subscriber hello
+received from first subscriber { hello: 'world2' }
+received from second subscriber { hello: 'world2' }
 */
 
 ```

@@ -1,5 +1,6 @@
 const { Readable, Writable, PassThrough } = require('stream')
-const { duplexify } = require('../lib/common')
+const yac = require('ya-common')
+const { duplexify } = yac.common
 const { v4: uuidv4 } = require('uuid')
 
 function delay (fun, time) {

@@ -1,5 +1,6 @@
 const { pause, newDummyChannel } = require('../common')
-const { COMMANDS } = require('../../lib/constants')
+const yac = require('ya-common')
+const { COMMANDS } = yac.constants
 const dut = require('../../lib/brokers/pubsub')
 
 describe('Pubsub broker', () => {

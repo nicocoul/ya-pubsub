@@ -1,6 +1,6 @@
 {
   "name": "ya-pubsub",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "",
   "main": "index.js",
   "author": "Nicolas Coulon <coulon_nicolas@hotmail.com> (https://github.com/nicocoul)",
@@ -14,9 +14,9 @@
     "server",
     "client"
   ],
-  "homepage": "https://github.com/nicocoul/yap-pubsub",
+  "homepage": "https://github.com/nicocoul/ya-pubsub",
   "bugs": {
-    "url": "https://github.com/nicocoul/yap-pubsub/issues"
+    "url": "https://github.com/nicocoul/ya-pubsub/issues"
   },
   "directories": {
     "lib": "./lib"
@@ -32,7 +32,7 @@
     "render-readme": "node cli/render-readme.js"
   },
   "dependencies": {
-    "ya-common": "^0.1.2"
+    "ya-common": "^0.1.3"
   },
   "devDependencies": {
     "eslint": "^8.3.0",
